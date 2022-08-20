@@ -20,6 +20,14 @@ public class PlayerMovementController : MonoBehaviour, IMove
         characterGrounding = GetComponent<CharacterGrounding>();
     }
 
+    private void Update()
+    {
+        if (Input.GetButtonDown("Fire1")
+           && characterGrounding.IsGrounded)
+        {
+            rigidbody2D.AddForce(Vector2.up * jumpForce);
+        }
+    }
 
     void FixedUpdate()
     {
@@ -27,11 +35,6 @@ public class PlayerMovementController : MonoBehaviour, IMove
         Speed = horizontal;
         Vector3 movement = new Vector3(horizontal, 0);
         transform.position += movement * Time.deltaTime * moveSpeed;
-        Debug.Log(Input.GetButton("Fire1"));
-        if (Input.GetButtonDown("Fire1") 
-            && characterGrounding.IsGrounded)
-        {
-            rigidbody2D.AddForce(Vector2.up * jumpForce);
-        }
+       
     } 
 }
